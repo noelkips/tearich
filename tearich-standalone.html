@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>TeaRich - Refreshingly Rich Flavor | Premium Kenyan Tea</title>
+  <meta name="description" content="Experience masterfully crafted premium teas from Kenya's finest estates. TeaRich offers refreshingly rich flavors with pure loose leaf black tea and exotic blends.">
+  <meta name="author" content="TeaRich Company Ltd">
+  
+  <meta property="og:title" content="TeaRich - Refreshingly Rich Flavor | Premium Kenyan Tea">
+  <meta property="og:description" content="Experience masterfully crafted premium teas from Kenya's finest estates. TeaRich offers refreshingly rich flavors with pure loose leaf black tea and exotic blends.">
+  <meta property="og:type" content="website">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom Design System */
+    :root {
+      --primary: #2d7a4b;
+      --primary-light: #9bc53d;
+      --accent: #f5d547;
+      --text-dark: #1a3d2e;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    
+    .bg-primary {
+      background-color: var(--primary);
+    }
+    
+    .bg-primary-light {
+      background-color: var(--primary-light);
+    }
+    
+    .bg-accent {
+      background-color: var(--accent);
+    }
+    
+    .text-primary {
+      color: var(--primary);
+    }
+    
+    .text-accent {
+      color: var(--accent);
+    }
+    
+    .hero-bg {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    }
+    
+    /* <CHANGE> Enhanced animations with floating effects */
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* <CHANGE> Floating animation for cards */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+    
+    @keyframes float-slow {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+    
+    @keyframes float-slower {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* <CHANGE> Enhanced hover-scale with floating and color change */
+    .hover-scale {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .hover-scale:nth-child(2) {
+      animation: float-slow 3.5s ease-in-out infinite;
+      animation-delay: 0.2s;
+    }
+    
+    .hover-scale:nth-child(3) {
+      animation: float-slower 4s ease-in-out infinite;
+      animation-delay: 0.4s;
+    }
+    
+    .hover-scale:nth-child(4) {
+      animation: float 3.2s ease-in-out infinite;
+      animation-delay: 0.1s;
+    }
+    
+    /* <CHANGE> Color change on hover for product cards */
+    .product-card:hover {
+      background: linear-gradient(135deg, rgba(155, 197, 61, 0.1), rgba(45, 122, 75, 0.1));
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 60px -10px rgba(45, 122, 75, 0.3);
+    }
+    
+    /* <CHANGE> Color change on hover for why-us cards */
+    .why-us-card:hover {
+      background: linear-gradient(135deg, rgba(155, 197, 61, 0.15), rgba(45, 122, 75, 0.08));
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 60px -10px rgba(45, 122, 75, 0.25);
+      border: 1px solid rgba(155, 197, 61, 0.3);
+    }
+    
+    /* <CHANGE> Color change on hover for contact cards */
+    .contact-card:hover {
+      background: linear-gradient(135deg, rgba(155, 197, 61, 0.12), rgba(45, 122, 75, 0.08));
+      transform: translateY(-12px);
+      box-shadow: 0 25px 60px -10px rgba(45, 122, 75, 0.25);
+    }
+    
+    .nav-scrolled {
+      background-color: rgba(45, 122, 75, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    #mobile-menu.open {
+      max-height: 500px;
+    }
+    
+    .hero-overlay {
+      background: linear-gradient(to right, rgba(45, 122, 75, 0.9), rgba(45, 122, 75, 0.7));
+    }
+    
+    /* <CHANGE> Distinct background for Why Choose Us section */
+    .why-us-section {
+      background: linear-gradient(135deg, rgba(155, 197, 61, 0.08) 0%, rgba(45, 122, 75, 0.05) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .why-us-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(155, 197, 61, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    .why-us-section::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(45, 122, 75, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    /* <CHANGE> Enhanced footer styling */
+    .footer-gradient {
+      background: linear-gradient(135deg, var(--primary) 0%, rgba(45, 122, 75, 0.95) 100%);
+    }
+    
+    .footer-accent-line {
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent), var(--primary-light));
+    }
+    
+    .footer-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-light);
+      transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover::after {
+      width: 100%;
+    }
+    
+    .footer-link:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-primary transition-all duration-300">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+          </svg>
+          <span class="text-3xl font-bold text-white">TeaRich</span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="text-white hover:text-accent transition-colors font-medium">Home</a>
+          <a href="#about" class="text-white hover:text-accent transition-colors font-medium">About</a>
+          <a href="#products" class="text-white hover:text-accent transition-colors font-medium">Products</a>
+          <a href="#why-us" class="text-white hover:text-accent transition-colors font-medium">Why Us</a>
+          <a href="#contact" class="text-white hover:text-accent transition-colors font-medium">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="md:hidden text-white">
+          <svg id="menu-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="menu-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden">
+        <a href="#home" class="block py-3 text-white hover:text-accent transition-colors">Home</a>
+        <a href="#about" class="block py-3 text-white hover:text-accent transition-colors">About</a>
+        <a href="#products" class="block py-3 text-white hover:text-accent transition-colors">Products</a>
+        <a href="#why-us" class="block py-3 text-white hover:text-accent transition-colors">Why Us</a>
+        <a href="#contact" class="block py-3 text-white hover:text-accent transition-colors">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative min-h-screen flex items-center pt-20">
+    <div class="absolute inset-0 z-0" style="background-image: url('tea_bg.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+
+    <div class="container mx-auto px-4 z-10 relative">
+      <div class="max-w-3xl fade-in">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+          A <span class="text-accent">Refreshingly Rich Flavor</span> In Every Cup
+        </h1>
+        <p class="text-xl md:text-2xl text-white mb-8 opacity-90">
+          Masterfully crafted teas from the finest tea estates of Kenya. Experience the perfect blend of tradition and innovation.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#products" class="bg-accent hover:opacity-90 text-gray-900 font-semibold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-center">
+            Explore Our Teas
+          </a>
+          <a href="#contact" class="bg-white bg-opacity-10 backdrop-blur-sm text-white border-2 border-white border-opacity-50 hover:bg-opacity-20 font-semibold text-lg px-8 py-4 rounded-lg text-center">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="fade-in">
+          <img src="class_tea.png" alt="Tea picking in Kenya" class="rounded-2xl shadow-2xl w-full h-[500px] object-cover">
+        </div>
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Story</h2>
+          <p class="text-lg text-gray-600 mb-4 leading-relaxed">
+            With a firm belief that no two teas are the same, TeaRich is on a constant search to create new and harmonious tea blends. We spur innovative and creative blends suited for taste profiles of all kinds.
+          </p>
+          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+            Located in the heart of Kenya's tea country at Bomet, we bring rich aromatic and exotic blends into your teacup. Every morning begins with the perfect cup of TeaRich – your first thing out of bed beverage.
+          </p>
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="bg-gradient-to-br from-white to-gray-100 rounded-lg shadow-md p-6 text-center hover-scale">
+              <svg class="w-12 h-12 text-primary mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+              <p class="font-semibold text-gray-900">Premium Quality</p>
+            </div>
+            <div class="bg-gradient-to-br from-white to-gray-100 rounded-lg shadow-md p-6 text-center hover-scale">
+              <svg class="w-12 h-12 text-primary mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+              </svg>
+              <p class="font-semibold text-gray-900">100% Natural</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Premium Teas</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Discover our masterfully crafted tea collection, each blend offering a unique and refreshingly rich flavor
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Product 1 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale product-card">
+          <div class="relative overflow-hidden">
+            <img src="best_seller.jpg" alt="TeaRich Pure Loose Leaf Black Tea" class="w-full h-80 object-cover">
+            <div class="absolute top-4 right-4 bg-accent text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
+              Bestseller
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Pure Loose Leaf Black Tea</h3>
+            <p class="text-gray-600 mb-4">
+              Our signature blend - rich, aromatic, and full-bodied. Perfect for your morning ritual.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-semibold text-primary">100gms</span>
+              <a href="tel:0710545252" class="bg-primary hover:opacity-90 text-white px-6 py-2 rounded-lg font-medium transition-all">Order Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale product-card">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600" alt="Premium Blend Tea" class="w-full h-80 object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Premium Blend</h3>
+            <p class="text-gray-600 mb-4">
+              A harmonious blend crafted for discerning tea lovers seeking exceptional taste.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-semibold text-primary">100gms</span>
+              <a href="tel:0710545252" class="bg-primary hover:opacity-90 text-white px-6 py-2 rounded-lg font-medium transition-all">Order Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover-scale product-card">
+          <div class="relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=600" alt="Estate Reserve Tea" class="w-full h-80 object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Estate Reserve</h3>
+            <p class="text-gray-600 mb-4">
+              Hand-picked from our finest estates, offering an exotic and rich flavor profile.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-semibold text-primary">100gms</span>
+              <a href="tel:0710545252" class="bg-primary hover:opacity-90 text-white px-6 py-2 rounded-lg font-medium transition-all">Order Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section id="why-us" class="py-20 why-us-section">
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Why Choose TeaRich?</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          We're committed to bringing you the finest tea experience with every cup
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale why-us-card border border-transparent">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">100% Natural</h3>
+          <p class="text-gray-600">Pure, natural tea leaves with no additives or artificial flavors</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale why-us-card border border-transparent">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Premium Quality</h3>
+          <p class="text-gray-600">Masterfully crafted blends from Kenya's finest tea estates</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale why-us-card border border-transparent">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Made with Love</h3>
+          <p class="text-gray-600">Every batch is carefully selected and processed with passion</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale why-us-card border border-transparent">
+          <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">Customer First</h3>
+          <p class="text-gray-600">Dedicated to bringing rich aromatic blends to your teacup</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+          <p class="text-xl text-gray-600">We'd love to hear from you. Reach out for orders or inquiries</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale contact-card">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Phone</h3>
+            <a href="tel:0710545252" class="text-gray-600 hover:text-primary transition-colors">0710 545252</a>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale contact-card">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Email</h3>
+            <a href="mailto:tearich25@gmail.com" class="text-gray-600 hover:text-primary transition-colors break-all text-sm">tearich25@gmail.com</a>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-8 text-center hover-scale contact-card">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Location</h3>
+            <p class="text-gray-600 text-sm">JUAKALI STREET, Kenya Industrial Estate Bomet, P.O.BOX 1088-20200, Kericho, Kenya</p>
+          </div>
+        </div>
+
+        <div class="mt-12 hero-bg rounded-2xl shadow-2xl p-8 text-center">
+          <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+            Ready to Experience the TeaRich Difference?
+          </h3>
+          <p class="text-white text-lg mb-6 opacity-90">
+            Order your favorite blend today and start every morning with a refreshingly rich flavor!
+          </p>
+          <a href="tel:0710545252" class="inline-block bg-accent hover:opacity-90 text-gray-900 font-semibold px-8 py-4 text-lg rounded-lg shadow-lg hover:scale-105 transition-all duration-300">
+            Order Now - 0710 545252
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-gradient text-white">
+    <!-- <CHANGE> Enhanced footer with accent line and better styling -->
+    <div class="footer-accent-line"></div>
+    
+    <div class="container mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <!-- Brand Section -->
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </svg>
+            <span class="text-2xl font-bold">TeaRich</span>
+          </div>
+          <p class="text-white opacity-80 leading-relaxed">Refreshingly Rich Flavor - Masterfully crafted teas from Kenya's finest estates. Experience premium quality in every cup.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-bold text-lg mb-6 text-accent">Quick Links</h4>
+          <div class="space-y-3">
+            <a href="#home" class="block footer-link text-white opacity-80">Home</a>
+            <a href="#about" class="block footer-link text-white opacity-80">About Us</a>
+            <a href="#products" class="block footer-link text-white opacity-80">Our Products</a>
+            <a href="#why-us" class="block footer-link text-white opacity-80">Why TeaRich</a>
+            <a href="#contact" class="block footer-link text-white opacity-80">Contact</a>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div>
+          <h4 class="font-bold text-lg mb-6 text-accent">Our Teas</h4>
+          <div class="space-y-3">
+            <p class="footer-link text-white opacity-80">Pure Loose Leaf Black Tea</p>
+            <p class="footer-link text-white opacity-80">Premium Blend</p>
+            <p class="footer-link text-white opacity-80">Estate Reserve</p>
+            <p class="text-white opacity-60 text-sm mt-4">100% Natural • Freshly Packed</p>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="font-bold text-lg mb-6 text-accent">Contact Us</h4>
+          <div class="space-y-4">
+            <div>
+              <p class="text-white opacity-60 text-sm mb-1">Phone</p>
+              <a href="tel:0710545252" class="footer-link text-white font-semibold">0710 545252</a>
+            </div>
+            <div>
+              <p class="text-white opacity-60 text-sm mb-1">Email</p>
+              <a href="mailto:tearich25@gmail.com" class="footer-link text-white font-semibold break-all text-sm">tearich25@gmail.com</a>
+            </div>
+            <div>
+              <p class="text-white opacity-60 text-sm mb-1">Location</p>
+              <p class="text-white text-sm opacity-80">Bomet, Kericho, Kenya</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white border-opacity-20 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-white opacity-60 text-sm text-center md:text-left mb-4 md:mb-0">
+            &copy; 2025 TeaRich - Blended & Packed by TeaRich Company Ltd. All rights reserved.
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-white opacity-60 hover:text-accent transition-colors text-sm">Privacy Policy</a>
+            <a href="#" class="text-white opacity-60 hover:text-accent transition-colors text-sm">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+
+    menuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('open');
+      menuOpen.classList.toggle('hidden');
+      menuClose.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        menuOpen.classList.remove('hidden');
+        menuClose.classList.add('hidden');
+      });
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
